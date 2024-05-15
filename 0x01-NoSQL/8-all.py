@@ -1,2 +1,12 @@
-// Write a Python function that lists all documents in a collection:
-db.school.deleteMany({name: "Holberton school"})
+#!/usr/bin/env python3
+"""
+Write a Python function that lists all documents in a collection:
+"""
+
+
+
+def list_all(mongo_collection):
+    """
+    Write a Python function that lists all documents in a collection:
+    """
+    return mongo_collection.find()
