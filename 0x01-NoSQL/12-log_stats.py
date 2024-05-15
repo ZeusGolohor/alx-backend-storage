@@ -6,7 +6,7 @@ about Nginx logs stored in MongoDB:
 
 
 def analyze_nginx_logs(mongo_uri="mongodb://localhost:27017",
-        database_name="logs", collection_name="nginx"):
+                       database_name="logs", collection_name="nginx"):
     """
     Write a Python script that provides some stats about
     Nginx logs stored in MongoDB:
