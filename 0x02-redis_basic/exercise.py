@@ -7,6 +7,23 @@ private variable named _redis
 import redis
 import uuid
 from typing import Union, Callable, Optional
+from functools import wraps
+
+
+def count_calls(method: Callable) -> Callable:
+    """
+    A method to count how many time the class was accessed.
+    """
+    key = method.__qualname__
+
+    @wraps(method)
+    def wrapper(self, *args, **kwargs):
+        """
+        A method to wrap the count method.
+        """
+        self._redis.incr(key)
+        return method(self, *args, **kwargs)
+    return wrapper
 
 
 class Cache:
@@ -20,6 +37,7 @@ class Cache:
         self._redis = redis.Redis()
         self._redis.flushdb()
 
+    @count_calls
     def store(self, data: Union[str, bytes, int, float]) -> str:
         """
         A method used to store new data in the redis db.
